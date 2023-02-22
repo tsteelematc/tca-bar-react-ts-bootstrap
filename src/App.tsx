@@ -1,36 +1,49 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Home } from './Home';
 
-const Home = () => (
-  <>
-    <h1>
-      TCA Bar React TS Bootstrap
-    </h1>
-    <h2>
-      Companion App
-    </h2>
-    <Button 
-      variant="outline-primary"
-      className="mt-3"
-    >
-      Play Bar
-    </Button>
-    <Card
-      className='mt-3'
-    >
-      <Card.Header>
-        Leaderboard
-      </Card.Header>
-      <Card.Body>
-        Play a game to see your leaderboard...
-      </Card.Body>
-    </Card>
-  </>
-);
+interface GameResult {
+  winner: string;
+  players: string[];
+};
+
+const dummyGameResults: GameResult[] = [
+  {
+      winner: "Tom"
+      , players: ["Tom", "Taylor"]
+      // , won: false
+
+  }
+  , {
+      winner: "Taylor"
+      , players: ["Jack", "Taylor"]
+  }
+  , {
+      winner: "Taylor"
+      , players: ["Tom", "Taylor", "Jack"]
+  }
+  , {
+      winner: "X"
+      , players: ["X", "Joe"]
+  }
+  , {
+      winner: "X"
+      , players: ["X", "Joe"]
+  }
+  , {
+      winner: "Joe"
+      , players: ["X", "Joe"]
+  }
+  , {
+      winner: "Jack"
+      , players: ["X", "Joe", "Jack"]
+  }
+];
+
+
+
 
 function App() {
   return (
