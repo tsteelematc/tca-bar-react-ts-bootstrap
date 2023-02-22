@@ -50,8 +50,15 @@ const dummyGameResults: GameResult[] = [
   }
 ];
 
-
-
+const getPreviousPlayers = (grs: GameResult[]) => {
+    
+  // const allPreviousPlayers = grs.map(x => x.players);
+  const allPreviousPlayers = grs.flatMap(x => x.players);
+  
+  return [
+      ...new Set(allPreviousPlayers)
+  ].sort();
+};
 
 function App() {
 
@@ -62,7 +69,9 @@ function App() {
     },
     {
       path: "/setup",
-      element: <Setup />,
+      element: <Setup
+                  previousPlayers={getPreviousPlayers(dummyGameResults)} 
+                />
     },
     {
       path: "/play",
