@@ -15,10 +15,13 @@ const Home = () => (
     </h2>
     <Button 
       variant="outline-primary"
+      className="mt-3"
     >
       Play Bar
     </Button>
-    <Card>
+    <Card
+      className='mt-3'
+    >
       <Card.Header>
         Leaderboard
       </Card.Header>
@@ -31,7 +34,9 @@ const Home = () => (
 
 function App() {
   return (
-    <div className="App">
+    <div 
+      className="App m-3"
+    >
       <Home />
     </div>
   );
