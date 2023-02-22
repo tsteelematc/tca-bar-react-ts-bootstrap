@@ -2,7 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { 
+  createHashRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 import { Home } from './Home';
+import { Setup } from './Setup';
+import { Play } from './Play';
 
 interface GameResult {
   winner: string;
@@ -46,11 +54,27 @@ const dummyGameResults: GameResult[] = [
 
 
 function App() {
+
+  const router = createHashRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/setup",
+      element: <Setup />,
+    },
+    {
+      path: "/play",
+      element: <Play />,
+    },
+  ]);
+
   return (
     <div 
       className="App m-3"
     >
-      <Home />
+      <RouterProvider router={router} />
     </div>
   );
 }
