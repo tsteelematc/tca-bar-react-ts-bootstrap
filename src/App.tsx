@@ -1,38 +1,38 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const Home = () => (
-  <>
-    <h1>
-      TCA Bar React TS Bootstrap
-    </h1>
-    <h2>
-      Companion App
-    </h2>
-    <Button 
-      variant="outline-primary"
-    >
-      Play Bar
-    </Button>
-    <Card>
-      <Card.Header>
-        Leaderboard
-      </Card.Header>
-      <Card.Body>
-        Play a game to see your leaderboard...
-      </Card.Body>
-    </Card>
-  </>
-);
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import { Home } from './Home';
+import { Setup } from './Setup';
+import { Play } from './Play';
 
 function App() {
   return (
-    <div className="App">
-      <Home />
+    <div className="App m-3">
+      <h1>
+        TCA Bar React TS Bootstrap
+      </h1>
+      <h2>
+        Companion App
+      </h2>
+      <hr />
+      <HashRouter>
+        <Routes>
+          <Route 
+            path="/"
+            element={<Home />} 
+          />
+          <Route 
+            path="/setup"
+            element={<Setup />} 
+          />
+          <Route 
+            path="/play"
+            element={<Play />} 
+          />
+        </Routes>
+      </HashRouter>
     </div>
   );
 }
