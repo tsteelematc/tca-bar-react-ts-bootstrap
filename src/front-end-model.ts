@@ -4,6 +4,9 @@
 export interface GameResult {
     winner: string;
     players: string[];
+
+    start: string;
+    end: string;
 };
 
 export interface LeaderboardPlayer {
@@ -20,6 +23,8 @@ export interface SetupInfo {
 
 export type GetPreviousPlayersFunc = (results: GameResult[]) => string[];
 export type CalculateLeaderboardFunc = (results: GameResult[]) => LeaderboardPlayer[];
+export type CalculateShortestGameFunc = (results: GameResult[]) => number;
+export type CalculateLongestGameFunc = (results: GameResult[]) => number;
 
 //
 // Default function implementations...
@@ -72,3 +77,13 @@ export const calculateLeaderboard: CalculateLeaderboardFunc = (results) => {
         }))
     ;
 };
+
+export const calcShortestGame: CalculateShortestGameFunc = (results) => Math.min(
+    ...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime())
+);
+
+
+export const calcLongestGame: CalculateLongestGameFunc = (results) => Math.max(
+    ...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime())
+);
+

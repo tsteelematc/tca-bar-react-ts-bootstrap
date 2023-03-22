@@ -17,37 +17,53 @@ import {
   GameResult
   , calculateLeaderboard, 
   SetupInfo,
-  getPreviousPlayers
+  getPreviousPlayers,
+  calcShortestGame,
+  calcLongestGame
 } from './front-end-model';
 
 const hardcodedGameResults: GameResult[] = [
   {
       winner: "Tom"
       , players: ["Tom", "Taylor"]
+      , start: "2023-03-22T20:40:00.000Z"
+      , end: "2023-03-22T20:45:30.000Z"
   }
   , {
       winner: "Taylor"
       , players: ["Jack", "Taylor"]
+      , start: "2023-03-22T20:50:00.000Z"
+      , end: "2023-03-22T20:53:00.000Z"
   }
   , {
       winner: "Taylor"
       , players: ["Tom", "Taylor", "Jack"]
+      , start: "2023-03-22T21:00:00.000Z"
+      , end: "2023-03-22T21:25:32.000Z"
   }
   , {
       winner: "X"
       , players: ["X", "Joe"]
+      , start: "2023-03-22T21:30:00.000Z"
+      , end: "2023-03-22T21:31:00.000Z"
   }
   , {
       winner: "X"
       , players: ["X", "Joe"]
+      , start: "2023-03-22T21:30:00.000Z"
+      , end: "2023-03-22T21:31:00.000Z"
   }
   , {
       winner: "Joe"
       , players: ["X", "Joe"]
+      , start: "2023-03-22T21:30:00.000Z"
+      , end: "2023-03-22T21:31:00.000Z"
   }
   , {
       winner: "Jack"
       , players: ["X", "Joe", "Jack"]
+      , start: "2023-03-22T21:30:00.000Z"
+      , end: "2023-03-22T21:31:00.000Z"
   }
 ];
 
@@ -83,6 +99,8 @@ const App = () => {
             element={
               <Home
                 leaderboardData={calculateLeaderboard(results)} 
+                shortestGame={calcShortestGame(results)}
+                longestGame={calcLongestGame(results)}
               />
             } 
           />
