@@ -100,10 +100,16 @@ export const Setup: React.FC<SetupProps> = ({
                 {
                     chosenPlayers.map(x =>(
                         <Form.Check
-                            label={x.name}
-                            checked={x.checked}
-                            onChange={() => togglePlayer(x.name)}
-                        />
+                        >
+                            <Form.Check.Input
+                                checked={x.checked}
+                                onChange={() => togglePlayer(x.name)}
+                                className={`${x.checked ? 'bg-success' : 'bg-white'}`}
+                            />
+                            <Form.Check.Label>
+                                {x.name}
+                            </Form.Check.Label>
+                        </Form.Check>
                     ))
                 }
             </Form>
