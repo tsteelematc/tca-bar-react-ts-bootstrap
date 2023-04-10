@@ -21,6 +21,7 @@ import {
 	, getShortestGameDuration
 	, getLongestGameDuration
 	, getAverageGameDurationByPlayerCount
+	, getPercentOfGamesThatReallyCoolThingHappened
 } from './front-end-model';
 
 const hardcodedGameResults: GameResult[] = [
@@ -29,42 +30,49 @@ const hardcodedGameResults: GameResult[] = [
 			, players: ["Tom", "Taylor"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:40:23.230Z"
+			, reallyCoolThingHappened: false
 	}
 	, {
 			winner: "Taylor"
 			, players: ["Jack", "Taylor"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:40:23.230Z"
+			, reallyCoolThingHappened: false
 	}
 	, {
 			winner: "Taylor"
 			, players: ["Tom", "Taylor", "Jack"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:48:23.230Z"
+			, reallyCoolThingHappened: true
 	}
 	, {
 			winner: "X"
 			, players: ["X", "Joe"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:40:23.230Z"
+			, reallyCoolThingHappened: true
 	}
 	, {
 			winner: "X"
 			, players: ["X", "Joe"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:40:23.230Z"
+			, reallyCoolThingHappened: false
 	}
 	, {
 			winner: "Joe"
 			, players: ["X", "Joe"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:40:23.230Z"
+			, reallyCoolThingHappened: false
 	}
 	, {
 			winner: "Jack"
 			, players: ["X", "Joe", "Jack"]
 			, start: "2023-03-23T17:38:23.230Z"
 			, end: "2023-03-23T17:40:23.230Z"
+			, reallyCoolThingHappened: false
 	}
 ];
 
@@ -103,6 +111,7 @@ const App = () => {
 								shortestGameDuration={getShortestGameDuration(results)}
 								longestGameDuration={getLongestGameDuration(results)}
 								averageGameDurationData={getAverageGameDurationByPlayerCount(results)}
+								thingHappenedPercent={getPercentOfGamesThatReallyCoolThingHappened(results)}
 							/>
 						} 
 					/>

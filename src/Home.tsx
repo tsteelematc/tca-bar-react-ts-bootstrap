@@ -14,6 +14,7 @@ interface HomeProps {
 		playerCount: number;
 		avgGameDuration: number;
 	}[];
+	thingHappenedPercent: number;
 };
 
 export const Home: React.FC<HomeProps> = ({
@@ -21,6 +22,7 @@ export const Home: React.FC<HomeProps> = ({
 	, shortestGameDuration
 	, longestGameDuration
 	, averageGameDurationData
+	, thingHappenedPercent
 }) => {
 
 	console.log(
@@ -111,6 +113,16 @@ export const Home: React.FC<HomeProps> = ({
 							</tbody>
 						</Table>                        
 					}
+				</Card.Body>
+			</Card>
+			<Card>
+				<Card.Header>
+					Cool Thing
+				</Card.Header>
+				<Card.Body>
+					<p>
+						{`Happens in ${(thingHappenedPercent * 100).toFixed(2)}% of games`}
+					</p>
 				</Card.Body>
 			</Card>
 		</>
