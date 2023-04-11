@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { GameResult, SetupInfo } from './front-end-model';
+import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 
 interface PlayProps {
     addGameResultFunc: (r: GameResult) => void;
@@ -14,6 +16,8 @@ export const Play: React.FC<PlayProps> = ({
 
     console.log(setupInfo);
 
+    const [happened, setHappened] = useState(false);
+
     const nav = useNavigate();
 
     const endGame = (winner: string) => {
@@ -23,6 +27,7 @@ export const Play: React.FC<PlayProps> = ({
             , players: setupInfo.chosenPlayers
             , start: setupInfo.start
             , end: new Date().toISOString()
+            , reallyCoolThingHappened: happened
         });
 
         nav(-2);
@@ -34,7 +39,12 @@ export const Play: React.FC<PlayProps> = ({
                 Play
             </h2>
             <p>
-                Some data collection stuff goes here...
+                <Form.Check
+                    label="Really cool thing happened"
+                    type="switch"
+                    checked={happened}
+                    onChange={(e) => setHappened(e.target.checked)}
+                />                
             </p>
             {
                 setupInfo.chosenPlayers.map(x => (
