@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +23,11 @@ import {
 	, getAverageGameDurationByPlayerCount
 	, getPercentGamesReallyCoolThingHappened
 } from './front-end-model';
+
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
+import localForage from 'localforage';
 
 const hardcodedGameResults: GameResult[] = [
 	{
@@ -85,11 +90,41 @@ const App = () => {
 		, chosenPlayers: []
 	});
 
+
+	const [emailKey, setEmailKey] = useState("");
+ 
+
+	useEffect(
+		() => {
+			const loadEmailFromLocalStorage = async () => {
+				try {
+					const email = await localForage.getItem<string>("emailKey");
+					setEmailKey(email ?? "");
+				}
+				catch (err) {
+					console.error(err);
+				}
+			};
+
+			loadEmailFromLocalStorage();
+		}
+		, []
+	);
+
 	const addGameResult = (r: GameResult) => {
 		setGameResults([
 			...results
 			, r
 		]);
+	};
+
+	const saveEmailToLocalStorage = async () => {
+		try {
+			await localForage.setItem("emailKey", emailKey)
+		}
+		catch (err) {
+			console.error(err);
+		}
 	};
 
 	return (
@@ -100,6 +135,20 @@ const App = () => {
 			<h2>
 				Companion App
 			</h2>
+			<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+				<Form.Label>Email address</Form.Label>
+				<Form.Control 
+					type="text" 
+					placeholder="Enter email address"
+					value={emailKey} 
+					onChange={(e) => setEmailKey(e.target.value)}
+				/>
+				<Button
+					onClick={saveEmailToLocalStorage}
+				>
+					Save
+				</Button>
+			</Form.Group>
 			<hr />
 			<HashRouter>
 				<Routes>
