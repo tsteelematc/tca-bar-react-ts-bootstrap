@@ -28,6 +28,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import localforage from 'localforage';
 
+import { loadGamesFromCloud, saveGameToCloud } from './tca-cloud-api';
+
 const hardcodedGameResults: GameResult[] = [
 	{
 			winner: "Tom"
@@ -85,14 +87,16 @@ const App = () => {
 	//
 	// State hooks...
 	//
-	const [results, setGameResults] = useState(hardcodedGameResults);
+	// const [results, setGameResults] = useState(hardcodedGameResults);
+	const [results, setGameResults] = useState<GameResult[]>([]);
 
 	const [setupInfo, setSetupInfo] = useState<SetupInfo>({
 		start: ""
 		, chosenPlayers: []
 	});
 
-	const [emailKey, setEmailKey] = useState("");
+	const [emailKeyForInput, setEmailKeyForInput] = useState("");
+	const [emailKeyForLoading, setEmailKeyForLoading] = useState("");
 
 	//
 	// useEffect hook
@@ -100,27 +104,55 @@ const App = () => {
 	useEffect(
 		() => {
 
-			const loadEmailKey = async () => {
+			const loadEmailKeyAndGameResults = async () => {
 
 				try {
-					setEmailKey(
-						await localforage.getItem("emailKey") ?? ""
-					);
+					const ek = await localforage.getItem<string>("emailKey") ?? "";
+
+					if (ek.length > 0) {
+						const resultsFromCloud = await loadGamesFromCloud(
+							ek
+							, "tca-bar-react-ts-bootstrap"
+						);
+
+						if (!ignore) {
+							setGameResults(resultsFromCloud);
+						}
+					}
+
+					if (!ignore) {
+						setEmailKeyForLoading(ek);
+						setEmailKeyForInput(ek);
+					}
 				}
 				catch (err) {
 					console.error(err);
 				}
 			};
 
-			loadEmailKey();
+			let ignore = false;
+			loadEmailKeyAndGameResults();
+			return () => {
+				ignore = true;
+			};
 		}
-		, []
+		, [emailKeyForLoading]
 	);
 
 	//
 	// Helper functions...
 	//
-	const addGameResult = (r: GameResult) => {
+	const addGameResult = async (r: GameResult) => {
+
+		// Save the game to the cloud.
+		await saveGameToCloud(
+			emailKeyForInput 
+			, "tca-bar-react-ts-bootstrap"
+			, r.end
+			, r				
+		);
+
+		// Optimistically update state as if it worked, happy path ! ! !
 		setGameResults([
 			...results
 			, r
@@ -129,10 +161,12 @@ const App = () => {
 
 	const saveEmailKey = async () => {
 		try {
-			await localforage.setItem(
+			const locallySavedEmailKey = await localforage.setItem(
 				"emailKey"
-				, emailKey
+				, emailKeyForInput
 			);
+
+			setEmailKeyForLoading(locallySavedEmailKey);
 		}
 		catch (err) {
 			console.error(err);
@@ -155,8 +189,8 @@ const App = () => {
 				<Form.Control 
 					type="text" 
 					placeholder="Enter new player name"
-					value={emailKey} 
-					onChange={(e) => setEmailKey(e.target.value)}
+					value={emailKeyForInput} 
+					onChange={(e) => setEmailKeyForInput(e.target.value)}
 				/>
 				<Button
 					onClick={saveEmailKey}
