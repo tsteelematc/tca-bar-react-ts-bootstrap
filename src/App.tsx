@@ -28,64 +28,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import localforage from 'localforage';
 
-const hardcodedGameResults: GameResult[] = [
-	{
-			winner: "Tom"
-			, players: ["Tom", "Taylor"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:40:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-	, {
-			winner: "Taylor"
-			, players: ["Jack", "Taylor"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:40:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-	, {
-			winner: "Taylor"
-			, players: ["Tom", "Taylor", "Jack"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:48:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-	, {
-			winner: "X"
-			, players: ["X", "Joe"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:40:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-	, {
-			winner: "X"
-			, players: ["X", "Joe"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:40:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-	, {
-			winner: "Joe"
-			, players: ["X", "Joe"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:40:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-	, {
-			winner: "Jack"
-			, players: ["X", "Joe", "Jack"]
-			, start: "2023-03-23T17:38:23.230Z"
-			, end: "2023-03-23T17:40:23.230Z"
-			, reallyCoolThingHappened: false
-	}
-];
-
 const App = () => {
 
 	//
 	// State hooks...
 	//
-	const [results, setGameResults] = useState(hardcodedGameResults);
+	const [results, setGameResults] = useState<GameResult[]>([]);
 
 	const [setupInfo, setSetupInfo] = useState<SetupInfo>({
 		start: ""
