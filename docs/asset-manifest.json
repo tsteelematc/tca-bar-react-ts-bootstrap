@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tca-bar-react-ts-bootstrap/static/css/main.756af292.css",
-    "main.js": "/tca-bar-react-ts-bootstrap/static/js/main.54cb6378.js",
+    "main.js": "/tca-bar-react-ts-bootstrap/static/js/main.23a3c899.js",
     "static/js/787.1bfb2b9c.chunk.js": "/tca-bar-react-ts-bootstrap/static/js/787.1bfb2b9c.chunk.js",
     "index.html": "/tca-bar-react-ts-bootstrap/index.html",
     "main.756af292.css.map": "/tca-bar-react-ts-bootstrap/static/css/main.756af292.css.map",
-    "main.54cb6378.js.map": "/tca-bar-react-ts-bootstrap/static/js/main.54cb6378.js.map",
+    "main.23a3c899.js.map": "/tca-bar-react-ts-bootstrap/static/js/main.23a3c899.js.map",
     "787.1bfb2b9c.chunk.js.map": "/tca-bar-react-ts-bootstrap/static/js/787.1bfb2b9c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.756af292.css",
-    "static/js/main.54cb6378.js"
+    "static/js/main.23a3c899.js"
   ]
 }
