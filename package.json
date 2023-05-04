@@ -2,7 +2,7 @@
   "name": "tca-bar-react-ts-bootstrap",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://2023-spring-adv-fe-tuth.gihub.io/tca-bar-react-ts-bootstrap",
+  "homepage": "https://tsteelematc.gihub.io/tca-bar-react-ts-bootstrap",
   "dependencies": {
     "@aws-sdk/util-dynamodb": "^3.326.0",
     "@testing-library/jest-dom": "^5.16.5",
